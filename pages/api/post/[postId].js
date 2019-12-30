@@ -1,9 +1,12 @@
-import { getPosts } from "../../../src/blog-posts";
+import posts from './../../../model/Schema/posts';
 
-const posts = getPosts();
 
-export default (req, res) => {
-  res.json({
-    post: posts.find(post => post.slug === req.query.postId)
-  });
+
+export default async (req, res) => {
+   posts.find({"slug":req.query.postId}).then(a => {
+
+     return res.json({post:a.length ? a : null});
+
+   });
+
 };

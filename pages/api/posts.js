@@ -1,7 +1,9 @@
 import { getPosts } from "../../src/blog-posts";
 
-const posts = getPosts();
+const postsPro = new Promise((resolve,reject) => {
+      resolve(getPosts());
+}) 
 
 export default async (req, res) => {
-  res.json({ posts });
+  postsPro.then(posts => res.json({posts}));
 };
