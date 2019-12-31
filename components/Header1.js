@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Nav from './Nav'
+import './../src/styles/_header.sass';
 
 class Header extends Component{
 
@@ -7,7 +8,7 @@ class Header extends Component{
     render(){
         return(
             <header>
-                <div>
+                <div className="logo">
                     GÖRKEM BAYRAKTAR
                 </div>
 

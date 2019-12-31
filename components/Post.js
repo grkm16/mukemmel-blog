@@ -17,7 +17,7 @@ const Post = ({post}) => (
         <div className="blog-text">
         <ReactMarkdown source={post.details} />
         </div>
-        {post.date.current}
+        
         <div className="blog-date">{TimeAgo(post.date.current) }</div>
   </div>
 

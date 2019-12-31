@@ -6,6 +6,8 @@ import Head from "next/head";
 import Header from './../components/Header1'
 import Post from './../components/Post'
 
+import '../src/styles/_main.sass';
+
 
 /*
 const Home = ({ posts }) => (
@@ -124,7 +126,7 @@ class Home extends Component{
   render(){
     
       return (
-        <div className="container">
+        <div className="test">
 
           <Head>
             <title>Home</title>
