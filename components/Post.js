@@ -3,6 +3,10 @@ import Link from 'next/link'
 import ReactMarkdown from "react-markdown";
 
 
+import TimeAgo from '../helper/func.timeAgo'
+
+
+
 const Post = ({post}) => (
     <div className="blog">
         <h2 className="blog-title">
@@ -13,7 +17,8 @@ const Post = ({post}) => (
         <div className="blog-text">
         <ReactMarkdown source={post.details} />
         </div>
-        <div className="blog-date">{post.date.current}</div>
+        {post.date.current}
+        <div className="blog-date">{TimeAgo(post.date.current) }</div>
   </div>
 
 );

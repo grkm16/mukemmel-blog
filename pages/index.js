@@ -1,13 +1,13 @@
-import React from "react";
+import React,{Component} from "react";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
-import Link from "next/link";
-import ReactMarkdown from "react-markdown";
+
 
 import Header from './../components/Header1'
 import Post from './../components/Post'
 
 
+/*
 const Home = ({ posts }) => (
   <div className="container">
 
@@ -20,7 +20,7 @@ const Home = ({ posts }) => (
 
     {posts.map(post => <Post post={post}/>)}
     
-    { /* 
+    { <!--
     <Head>
       <title>Home</title>
       <link rel="icon" href="/favicon.ico" />
@@ -90,7 +90,7 @@ const Home = ({ posts }) => (
       }
     `}</style>
 
-    */}
+    -->}
   </div>
 );
 
@@ -101,5 +101,46 @@ Home.getInitialProps = async ({ req }) => {
   const json = await res.json();
   return { posts: json.posts };
 };
+*/
+
+class Home extends Component{
+
+  constructor(){
+    super();
+    
+    this.state = {
+      isLoading : true,
+      posts:null
+    };
+  }
+
+  async componentDidMount(){
+    this.setState({isLoading : true});
+    const {posts} = await fetch("http://localhost:3000/api/posts").then( a => a.json());
+    this.setState({posts,isLoading : false});
+    
+  }
+
+  render(){
+    
+      return (
+        <div className="container">
+
+          <Head>
+            <title>Home</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+      
+          <Header />
+          {
+            this.state.isLoading ? 
+            <p>Yükleniyor</p> : this.state.posts.map( post => <Post key={post._id} post={post} />)
+          }
+        </div>
+
+      );
+  }
+}
+
 
 export default Home;
