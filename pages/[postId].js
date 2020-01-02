@@ -76,6 +76,7 @@ class BlogPost extends Component {
   constructor(props){
     super(props);
     this.state = {
+      comment:'',
       isLoading:true,
       comments:[]
     }
@@ -106,7 +107,7 @@ class BlogPost extends Component {
         <div className="comments">
             <h1>YORUMLAR ({this.state.comments.length})</h1>
             {this.state.comments.map( c => (
-                  <div>
+                  <div key={c._id}>
                       <p>Ziyaretçi  {c.date.current} </p>
                       <p>
                           {c.comment}
@@ -118,7 +119,23 @@ class BlogPost extends Component {
 
       );
   }
-
+  async postData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
+  }
 
   static async getInitialProps({query}) {
     const data = await fetch(`http://localhost:3000/api/post/${query.postId}`).then(data => data.json());
@@ -126,6 +143,40 @@ class BlogPost extends Component {
     if(post == null)
         return {post};
     return { post:post[0] };
+  }
+
+
+  async sendComment(){
+    event.preventDefault();
+    
+    const result = await this.postData("http://localhost:3000/api/actions",{
+      postId:this.props.post._id,
+      comment:this.state.comment,
+      action:"comment"
+    });
+
+    if(result.error){
+      alert(result.error)
+    }else{
+      const a = this.state.comments;
+      a.unshift(result);
+      this.setState({
+          comment:'',
+          comments:a
+      });
+
+      
+    }
+
+
+  }
+
+  changeComment(e){
+
+    this.setState({
+      comment:e.target.value
+    })
+
   }
 
   render() {
@@ -157,6 +208,21 @@ class BlogPost extends Component {
         <div className="blog-date">{this.props.post.date.current}</div>
         <hr/>
         
+        <form onSubmit={this.sendComment.bind(this)}>
+            <label>
+               Yorumunuz
+              <textarea rows="5" style={
+                {
+                  width:"100%"
+                }
+              } value={this.state.comment} onChange={this.changeComment.bind(this)} />
+            </label>
+
+            <button type="submit" disabled={this.state.comment.length < 5}>Gönder</button>
+
+        </form>
+
+
         <this.TempComments />
      
       </div>

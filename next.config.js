@@ -13,5 +13,10 @@ module.exports = withCSS(withSass({
   },
   env: {
     MLAB_CONNECTION_STRING: "mongodb://admin:admin123@ds111876.mlab.com:11876/specialproject"
-  }
+  },
+  api: {
+    bodyParser: {
+      sizeLimit: '1mb',
+    },
+  },
 }));
