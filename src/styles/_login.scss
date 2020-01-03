@@ -1,0 +1,102 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css");
+
+html,body{padding:0;margin:0;} 
+body{
+  font-family:Arial;
+  height:100vh;
+  overflow:hidden;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  background-color:#193441;
+}
+.container--flex{
+  max-width:300px;
+  width:100%;
+  background-color:#FCFFF5;
+  padding:6px 12px;
+  margin:50px 0;
+  border-radius:12px;
+  .flex--header{
+    font-size:24px;
+    font-weight:bold;
+    text-transform:uppercase;
+    text-align:center;
+    padding:50px;
+    box-sizing:border-box;
+    
+    
+  }
+  .flex--form{
+    margin:10px;
+    
+    .input{
+      margin-bottom:12px;
+      border-bottom:1px solid gray;
+     
+      .cap{
+        font-size:.8em;
+        margin-bottom:6px;
+      }
+      .icon{
+        position:relative;
+        i{
+          left:12px;
+          bottom:8px;
+          position:absolute;
+        }
+        input{
+          box-sizing:border-box;
+          padding:6px;
+          width:100%;
+          padding:9px 0;
+          padding-left:40px;
+          margin-right:0;
+          text-decoration:none;
+          border:none;
+          &:focus{
+            outline:none;
+            border-bottom:1px solid #193441;
+      
+          }
+        }
+        .button{
+          padding:10px;
+        }
+      }
+    }
+  }
+  
+}
+
+.text-right{
+  text-align:right;
+  font-size:.8em;
+}
+a{
+  text-decoration:none;
+}
+.button{
+  width:100%;
+  box-sizing:border-box;
+  margin:40px 0;
+}
+.button-login{
+  color:#D1DBBD;
+  padding:10px;
+  box-sizing:border-box;
+  background:linear-gradient(to left,#3E606F,#3E606F,#193441);
+  width:100%;
+  border-radius:30px;
+  &:hover{
+    color:#FCFFF5;
+     background:linear-gradient(to right,#3E606F,#3E606F,#193441);
+  }
+}
+button:focus{
+  outline:none;
+}
+.button-disabled{
+  cursor:not-allowed;
+  opacity:.8;
+}
