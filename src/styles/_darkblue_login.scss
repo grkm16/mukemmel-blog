@@ -37,7 +37,10 @@ body{
   }
   .flex--form{
     margin:10px;
-    
+    a{
+      text-decoration:none;
+      color:#fff;
+    }
     .input{
       margin-bottom:12px;
       border-bottom:1px solid gray;
@@ -82,10 +85,7 @@ body{
   text-align:right;
   font-size:.8em;
 }
-a{
-  text-decoration:none;
-  color:#fff;
-}
+
 .button{
   width:100%;
   box-sizing:border-box;
@@ -122,11 +122,11 @@ button:focus{
    90%{transform:translatex(-5px)}
    80%{transform:translateX(0px)}
    80%{transform:translateX(5px)}
-   60%{transform:tanslateX(-10px);}
-   50%{transform:tanslateX(10px);}
-   40%{transform:tanslateX(-15px);}
+   60%{transform:translateX(-10px);}
+   50%{transform:translateX(10px);}
+   40%{transform:translateX(-15px);}
    30%{transform:translateX(15px);}
-   20%{ transform:translateX(-30px);}
+   20%{transform:translateX(-30px);}
    10%{transform:translateX(30px);}
    
  }

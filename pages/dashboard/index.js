@@ -15,6 +15,7 @@ class TEMP extends Component{
                 status:false,
                 message:''
             },
+            forgotPassword:false,
             email: '',
             password:'',
             form:'LOGIN'
@@ -57,7 +58,7 @@ class TEMP extends Component{
                     message:''
                 }
             })
-        },2000)
+        },6000)
         
 
     }
@@ -69,16 +70,23 @@ class TEMP extends Component{
 
     }
 
+    forgotPassword(){
+        this.setState({
+            forgotPassword:!this.state.forgotPassword
+        })
+    }
+
     render(){
         
         if(this.state.form === 'LOGIN')
             return (
-                <div className={"container--flex "+ (this.state.error.status ? "validation--error" : "") }>
+                <div className={"container--flex "+ (this.state.error.status && "validation--error" ) }>
       
                         <div className="flex--header">
                             Giriş Yap  
                         </div>
                         <div className="flex--form">
+
                             {
                                 this.state.error.status && 
                                 (
@@ -91,28 +99,34 @@ class TEMP extends Component{
 
                             <form onSubmit={this.submitLogin.bind(this)}>
                                     <div className="input">
-                                        <div className="cap">Kullanıcı adı</div>
+                                        <div className="cap">Kullanıcı adı veya Mail</div>
                                         <div className="icon">
                                             <i className="far fa-user"></i>
-                                            <input value={this.state.email} onChange={() => this.changeInput("email") } type="text" placeholder="kullanıcı adını yaz" />
+                                            <input value={this.state.email} onChange={() => this.changeInput("email") } type="text" placeholder="kullanıcı adı veya mail adresi" />
                                         </div>
                                     </div>
-                                    <div className="input">
-                                        <div className="cap">Şifre</div>
-                                        <div className="icon">
-                                        <i className="fas fa-lock"></i>
-                                        <input value={this.state.password} onChange={() => this.changeInput("password") } type="password" placeholder="şifreni yaz" />
-                                        </div>
-                                    </div>
+                                    {
+                                        !this.state.forgotPassword &&
+                                        (<div className="input">
+                                            <div className="cap">Şifre</div>
+                                            <div className="icon">
+                                            <i className="fas fa-lock"></i>
+                                            <input value={this.state.password} onChange={() => this.changeInput("password") } type="password" placeholder="şifreni yaz" />
+                                            </div>
+                                        </div>)
+                                    }
                                     <div className="text-right">
-                                        <a href="">Şifremi unuttum</a>
+                                        <a onClick={this.forgotPassword.bind(this)} href="#">{this.state.forgotPassword ? "Şifremi hatırladım": "Şifremi unuttum"}</a>
                                     </div>
                                     <div className="button">
                                     <button 
-                                        className={!(this.state.email.length && this.state.password.length) ? "button-login button-disabled" : "button-login" } 
-                                        disabled={ !(this.state.email.length && this.state.password.length)}
+                                        className={!(this.state.forgotPassword && this.state.email.length) && !(this.state.email.length && this.state.password.length) ? "button-login button-disabled" : "button-login" } 
+                                        disabled={  !(this.state.forgotPassword && this.state.email.length) 
+                                                        && 
+                                                    !(this.state.email.length && this.state.password.length)
+                                                }
                                         >
-                                            Giriş
+                                            {this.state.forgotPassword ? "Bağlantı gönder" : "Giriş yap"}
                                         </button>
                                     </div>
                             </form>

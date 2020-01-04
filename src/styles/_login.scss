@@ -102,21 +102,21 @@ button:focus{
 }
 
 .validation--error{
-  animation: error 1.6s ease-in 0s 1 forwards;
+  animation: error .8s ease-in 0s 1 forwards;
  }
  
  
  @keyframes error{
-   100%{transform:translateX(0);}
-   95%{transform:translateX(5px);}
-   90%{transform:translatex(-5px)}
-   80%{transform:translateX(0px)}
-   80%{transform:translateX(5px)}
-   60%{transform:tanslateX(-10px);}
-   50%{transform:tanslateX(10px);}
-   40%{transform:tanslateX(-15px);}
-   30%{transform:translateX(15px);}
-   20%{ transform:translateX(-30px);}
-   10%{transform:translateX(30px);}
-   
- }
+  100%{transform:translateX(0);}
+  95%{transform:translateX(5px);}
+  90%{transform:translatex(-5px)}
+  80%{transform:translateX(0px)}
+  80%{transform:translateX(5px)}
+  60%{transform:translateX(-10px);}
+  50%{transform:translateX(10px);}
+  40%{transform:translateX(-15px);}
+  30%{transform:translateX(15px);}
+  20%{transform:translateX(-30px);}
+  10%{transform:translateX(30px);}
+  
+}
