@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import Link from 'next/link';
 
-import '../../src/styles/_login.scss';
+import '../../src/styles/_darkblue_login.scss';
 
 class TEMP extends Component{
 
@@ -11,9 +11,14 @@ class TEMP extends Component{
     constructor(props){
         super(props);
         this.state = {
+            error:{
+                status:false,
+                message:''
+            },
             email: '',
             password:'',
-            form:'LOGIN'};
+            form:'LOGIN'
+        };
 
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -38,6 +43,21 @@ class TEMP extends Component{
     }
     submitLogin(e){
         e.preventDefault();
+        this.setState({
+            error:{
+                status:true,
+                message:"Kullanıcı adı veya şifre yanlış"
+            },
+            password:''
+        })
+        setTimeout(()=>{
+            this.setState({
+                error:{
+                    status:false,
+                    message:''
+                }
+            })
+        },2000)
         
 
     }
@@ -53,12 +73,22 @@ class TEMP extends Component{
         
         if(this.state.form === 'LOGIN')
             return (
-                <div className="container--flex">
+                <div className={"container--flex "+ (this.state.error.status ? "validation--error" : "") }>
       
                         <div className="flex--header">
                             Giriş Yap  
                         </div>
                         <div className="flex--form">
+                            {
+                                this.state.error.status && 
+                                (
+                                    <div className="form--error">
+                                        Kullanıcı adı veya şifre yanlış!
+                                    </div>
+                                )
+                            }
+                            
+
                             <form onSubmit={this.submitLogin.bind(this)}>
                                     <div className="input">
                                         <div className="cap">Kullanıcı adı</div>
