@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import Header from "../components/Header1";
 import Pnotfound from './p404';
 
+import dateFormat from '../helper/func.dateFormat';
+
 /*
 const BlogPost = ({ post }) => {
 
@@ -108,7 +110,7 @@ class BlogPost extends Component {
             <h1>YORUMLAR ({this.state.comments.length})</h1>
             {this.state.comments.map( c => (
                   <div key={c._id}>
-                      <p>Ziyaretçi  {c.date.current} </p>
+                      <p>Ziyaretçi  {dateFormat(c.date.current,'G UA Y UG')} </p>
                       <p>
                           {c.comment}
                       </p>
@@ -181,6 +183,10 @@ class BlogPost extends Component {
 
   render() {
 
+    /**
+     * if article not found 
+     * such return p404 page
+     */
     if(this.props.post == null){
      
       return (
@@ -205,7 +211,7 @@ class BlogPost extends Component {
         <div className="blog-text">
           <ReactMarkdown source={this.props.post.details} />
         </div>
-        <div className="blog-date">{this.props.post.date.current}</div>
+        <div className="blog-date">{dateFormat(this.props.post.date.current,'G UA Y')}</div>
         <hr/>
         
         <form onSubmit={this.sendComment.bind(this)}>

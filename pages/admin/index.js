@@ -4,14 +4,12 @@ import Link from 'next/link';
 import '../../src/styles/_darkblue_login.scss';
 
 class TEMP extends Component{
-
     
-
-
     constructor(props){
         super(props);
         this.state = {
             error:{
+                interval:null,
                 status:false,
                 message:''
             },
@@ -42,16 +40,20 @@ class TEMP extends Component{
             form : 'LOGIN'
         })
     }
-    submitLogin(e){
+    async submitLogin(e){
         e.preventDefault();
-        this.setState({
-            error:{
-                status:true,
-                message:"Kullanıcı adı veya şifre yanlış"
-            },
-            password:''
-        })
-        setTimeout(()=>{
+        
+        if(this.state.error.interval){
+            clearInterval(this.state.error.interval)
+            this.setState({
+                error:{
+                    status:false,
+                    message:''
+                }
+            })
+
+        }
+        let interval = setTimeout(()=>{
             this.setState({
                 error:{
                     status:false,
@@ -60,8 +62,19 @@ class TEMP extends Component{
             })
         },6000)
         
+        
+        
+        this.setState({
+                       error:{
+                                interval:interval,
+                                status:true,
+                                message:"Kullanıcı adı veya şifre yanlış"
+                        },
+                        password:''
+             })
 
     }
+    
 
     changeInput(type){
         this.setState({
@@ -83,7 +96,7 @@ class TEMP extends Component{
                 <div className={"container--flex "+ (this.state.error.status && "validation--error" ) }>
       
                         <div className="flex--header">
-                            Giriş Yap  
+                            {this.state.forgotPassword ? "ŞİFRENİ SIFIRLA":"GİRİŞ YAP"}
                         </div>
                         <div className="flex--form">
 
