@@ -140,7 +140,8 @@ class BlogPost extends Component {
   }
 
   static async getInitialProps({query}) {
-    const data = await fetch(`${process.env.WEBPATH}/api/post/${query.postId}`).then(data => data.json());
+    let p = query.postId;
+    const data = await fetch(`${process.env.WEBPATH}/api/post/`+p).then(data => data.json());
     const {post} = data;
     if(post == null)
         return {post};
