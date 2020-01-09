@@ -105,6 +105,7 @@ Home.getInitialProps = async ({ req }) => {
 };
 */
 
+
 class Home extends Component{
 
   constructor(){
@@ -118,7 +119,7 @@ class Home extends Component{
 
   async componentDidMount(){
     this.setState({isLoading : true});
-    const {posts} = await fetch("http://localhost:3000/api/posts").then( a => a.json());
+    const {posts} = await fetch(`${process.env.API_URL[process.env.NODE_ENV]}/posts`).then( a => a.json());
     this.setState({posts,isLoading : false});
     
   }
