@@ -213,7 +213,10 @@ class BlogPost extends Component {
         </div>
         <div className="blog-date">{dateFormat(this.props.post.date.current,'G UA Y')}</div>
         <hr/>
-        
+        <hr/>
+            Paylaş :   Facebook - Twitter
+            link:
+        <hr></hr>
         <form onSubmit={this.sendComment.bind(this)}>
             <label>
                Yorumunuz
@@ -228,6 +231,7 @@ class BlogPost extends Component {
 
         </form>
 
+        
 
         <this.TempComments />
      

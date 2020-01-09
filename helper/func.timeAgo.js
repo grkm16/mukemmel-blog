@@ -10,6 +10,7 @@ export default function TimeAgo(time = ""){
             {t:59, n:"Dakika"},
             {t:59,n:"Saat",},
             {t:23, n:"Gün"},
+            {t:7,n:"Hafta"},
             {t:30,n:"Ay"},
             { t:11, n:"Yıl"}
         ];
