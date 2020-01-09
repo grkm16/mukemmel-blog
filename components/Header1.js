@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import Nav from './Nav'
+import Link from 'next/link';
+
 import './../src/styles/_header.sass';
 
 class Header extends Component{
@@ -9,10 +10,24 @@ class Header extends Component{
         return(
             <header>
                 <div className="logo">
-                    GÖRKEM BAYRAKTAR
+                    GöRKEM BAYRAKTAR
                 </div>
 
-                <Nav />
+                <nav>
+                <Link href="">
+                    <a>VV</a>
+                </Link>
+                <Link href="">
+                    <a>Github</a>
+                </Link>
+                <Link href="">
+                    <a>Facebook</a>
+                </Link>
+                
+                <Link href="">
+                    <a>Twitter</a>
+                </Link>
+            </nav>
               
             </header>
 
