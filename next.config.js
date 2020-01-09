@@ -13,7 +13,7 @@ module.exports = withCSS(withSass({
   },
   env: {
     MLAB_CONNECTION_STRING: "mongodb://admin:admin123@ds111876.mlab.com:11876/specialproject",
-    API_URL:"https://gorkembayraktar.herokuapp.com/api"
+    WEBPATH:"https://gorkembayraktar.herokuapp.com"
   },
   api: {
     bodyParser: {

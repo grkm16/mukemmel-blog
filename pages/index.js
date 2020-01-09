@@ -119,7 +119,7 @@ class Home extends Component{
 
   async componentDidMount(){
     this.setState({isLoading : true});
-    const {posts} = await fetch(`${process.env.API_URL}/posts`).then( a => a.json());
+    const {posts} = await fetch(`${process.env.WEBPATH}/api/posts`).then( a => a.json());
     this.setState({posts,isLoading : false});
     
   }
