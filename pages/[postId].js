@@ -87,7 +87,7 @@ class BlogPost extends Component {
   async componentDidMount(){
     if(! this.props.post) return;
 
-    const data = await fetch(`${process.env.API_URL[process.env.NODE_ENV]}/comments?postId=${this.props.post._id}`).then(data => data.json());
+    const data = await fetch(`${process.env.API_URL}/comments?postId=${this.props.post._id}`).then(data => data.json());
     const {comment,error} = data;
     if(error){
       this.setState({
@@ -140,7 +140,7 @@ class BlogPost extends Component {
   }
 
   static async getInitialProps({query}) {
-    const data = await fetch(`${process.env.API_URL[process.env.NODE_ENV]}/post/${query.postId}`).then(data => data.json());
+    const data = await fetch(`${process.env.API_URL}/post/${query.postId}`).then(data => data.json());
     const {post} = data;
     if(post == null)
         return {post};
@@ -151,7 +151,7 @@ class BlogPost extends Component {
   async sendComment(){
     event.preventDefault();
     
-    const result = await this.postData(`${process.env.API_URL[process.env.NODE_ENV]}/actions`,{
+    const result = await this.postData(`${process.env.API_URL}/actions`,{
       postId:this.props.post._id,
       comment:this.state.comment,
       action:"comment"
