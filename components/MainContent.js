@@ -8,7 +8,7 @@ const MainContent = (props) => {
     
     return (
         <main>
-            {props.isLoading ? <p>Yükleniyor ..</p> : <div>Selamun aleykumgh</div>}
+            {props.isLoading ? <p>Yleniyor ..</p> : <div>Selamun aleykumgh</div>}
         </main>
 
     );

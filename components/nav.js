@@ -10,7 +10,7 @@ class Nav extends Component{
 
             <nav>
                 <Link href="">
-                    <a>İnstagram</a>
+                    <a>VV</a>
                 </Link>
                 <Link href="">
                     <a>Github</a>
