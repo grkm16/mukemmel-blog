@@ -1,0 +1,74 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css");
+html,body{margin:0;padding:0;}
+.banner{    
+  
+    box-sizing:border-box;
+    background:url('https://i.picsum.photos/id/676/1000/400.jpg');
+    background-position:center 100%;
+    animation:mountain 3s ease 0ms 1;
+    animation-fill-mode:forwards;
+      background-size: cover;
+      margin-bottom: 50px;
+      transition: 0.5s ease all;
+    position:relative;
+    z-index:-1;
+    overflow:hidden;
+    &:after{
+      content:'';
+      bottom:-100px;
+      right:-100px;
+      height:210px;
+      width:240px;
+      position:absolute;
+      background-color:#FFFFFF;
+      border-radius:50%;
+    }
+    .callout{
+          padding: 9em 3em 7em;
+      
+      .flex-row{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        .txt{
+          animation:banner 1s ease-in-out 0s 1;
+          animation-fill-mode:forwards;
+          transform:scale(0);
+          overflow:hidden;
+          text-align:center;
+          padding:20px;
+          color:#011826;
+          background-color:rgba(250,250,250,.6);
+          border-radius:8px;
+        }
+       
+      }
+    }
+     .social-icons{
+          z-index:10;
+          position:absolute;
+          bottom:0;
+          right:10px;
+          font-size:46px;
+          
+          i{
+            cursor:pointer;
+            color:#011826;
+            overflow:hidden;
+            
+          }
+        }
+  }
+  
+  @keyframes mountain{
+    to{
+      background-position:center 0%;
+    }
+  }
+  
+  @keyframes banner{
+    to{
+      transform:scale(1);
+    }
+  }

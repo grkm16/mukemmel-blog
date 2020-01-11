@@ -130,7 +130,7 @@ class Home extends Component{
         <div className="test">
 
           <Head>
-            <title>Home</title>
+            <title>Anasayfa</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
       
