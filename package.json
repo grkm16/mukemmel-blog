@@ -13,11 +13,16 @@
     "isomorphic-unfetch": "^3.0.0",
     "mongoose": "^5.8.3",
     "next": "^9.1.4",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "public-ip": "^4.0.0",
     "raw-loader": "^4.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-markdown": "^4.2.2"
+    "react-markdown": "^4.2.2",
+    "universal-analytics": "^0.4.20"
+  },
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "json-loader": "^0.5.7"
   }
 }

@@ -3,17 +3,18 @@ import HeaderNavigation from './HeaderNavigation';
 
 import './../src/styles/_header.scss';
 
+
+
+
 class Header extends Component{
-
-
     render(){
         return(
             <header>
                     <HeaderNavigation/>
                     <div className="banner">
-                        <div class="callout">
+                        <div className="callout">
                             <div className="flex-row">
-                            <h1 className="txt">GÖRKEM BAYRAKTAR</h1>
+                            <h1 className="txt">GÖRKEM BAYRAKTAR TEST</h1>
                             </div>
                         </div>
                         <div className="social-icons">

@@ -8,6 +8,8 @@ import Pnotfound from './p404';
 
 import dateFormat from '../helper/func.dateFormat';
 
+import ua from 'universal-analytics'
+
 /*
 const BlogPost = ({ post }) => {
 
@@ -143,6 +145,14 @@ class BlogPost extends Component {
     let p = query.postId;
     const data = await fetch(`${process.env.WEBPATH}/api/post/`+p).then(data => data.json());
     const {post} = data;
+
+   
+
+    const visitor = ua(process.env.GOOGLE_UA);
+    visitor.pageview(`/${p}`, process.env.WEBPATH, "Welcome", function (err) {
+      // …
+      console.log(err);
+    });
     if(post == null)
         return {post};
     return { post:post[0] };

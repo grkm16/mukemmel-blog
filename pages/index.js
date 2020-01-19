@@ -2,12 +2,17 @@ import React,{Component} from "react";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 
+import ua from 'universal-analytics'
+
 
 import Header from './../components/Header1'
 import Post from './../components/Post'
 
 import '../src/styles/_main.sass';
 
+
+const visitor = ua(process.env.GOOGLE_UA);
+visitor.pageview(`/`, process.env.WEBPATH, "Anasayfa", function (err) {});
 
 /*
 const Home = ({ posts }) => (
