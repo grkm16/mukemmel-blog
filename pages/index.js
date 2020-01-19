@@ -137,6 +137,7 @@ class Home extends Component{
           <Head>
             <title>Anasayfa</title>
             <link rel="icon" href="/favicon.ico" />
+            <meta name="google-site-verification" content="eDZ2F-rKi-4pw-juThz_p0Ffz1VIWKwA3TDY5mRfKo8" />
           </Head>
       
           <Header />
