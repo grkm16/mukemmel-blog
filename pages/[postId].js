@@ -3,78 +3,31 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import Header from "../components/Header1";
 import Pnotfound from './p404';
 
 import dateFormat from '../helper/func.dateFormat';
 
+import timeAgo from '../helper/func.timeAgo';
+
 import ua from 'universal-analytics'
+import Header2 from './../components/Temel/Nav'
 
-/*
-const BlogPost = ({ post }) => {
+import {
+    Box,
+    Container,
+    CardMedia,
+    Typography,
+    Card
+} from '@material-ui/core'
 
- 
-  return (
-            
+import {
+    Facebook as FacebookIcon,
+    Twitter as TwitterIcon,
+    AccountCircle as AccountCircleIcon
+} from '@material-ui/icons'
 
-            <div className="container">
-              <Head>
-                  <title>{post.title}</title>
-              </Head>
-              <Header />
-              <div className="blog">
-                <h2 className="blog-title">
-                  <Link href="/test">
-                    <a className="blog-title-link">{post.title}</a>
-                  </Link>
-                </h2>
-                <div className="blog-text">
-                  <ReactMarkdown source={post.details} />
-                </div>
-                <div className="blog-date">{post.date.current}</div>
-              </div>
-              <style jsx>{`
-                .container {
-                  max-width: 650px;
-                  width: 100%;
-                  margin: 0 auto;
-                }
+import FormComment from './../components/Temel/Form.comment'
 
-                .hero {
-                  text-align: center;
-                  margin: 96px 0;
-                }
-
-                .social-link {
-                  margin-right: 8px;
-                }
-
-                .hero-title {
-                  font-size: 48px;
-                }
-
-                .blog-date {
-                  text-align: right;
-                  color: #cccccc;
-                  margin: 12px 0 48px 0;
-                }
-
-                a {
-                  color: #35459e;
-                  text-decoration: none;
-                }
-              `}</style>
-            </div>
-        );
-}
-
-BlogPost.getInitialProps = async ({ req, query }) => {
-  const data = await fetch(`http://localhost:3000/api/post/${query.postId}`).then(data => data.json());
-  const {post} = data;
-  return { post:post[0] };
-};
-
-*/
 class BlogPost extends Component {
 
   constructor(props){
@@ -84,6 +37,8 @@ class BlogPost extends Component {
       isLoading:true,
       comments:[]
     }
+
+
 
   }
   async componentDidMount(){
@@ -108,14 +63,36 @@ class BlogPost extends Component {
       else if(this.state.comments.length == 0)
          return (<div>Yorum yapılmadı ilk yorum yapan sen ol!</div>);
       return (
-        <div className="comments">
-            <h1>YORUMLAR ({this.state.comments.length})</h1>
+
+
+        <div>
+            <Typography style={{'padding':'10px 0'}} variant="h5">
+                YORUMLAR ({this.state.comments.length})
+            </Typography>
             {this.state.comments.map( c => (
                   <div key={c._id}>
-                      <p>Ziyaretçi  {dateFormat(c.date.current,'G UA Y UG')} </p>
-                      <p>
-                          {c.comment}
-                      </p>
+                      <Card style={{'margin':'6px 0'}}>
+                      <Box display="flex">
+                          <Box>
+                            <AccountCircleIcon fontSize="large" style={{"padding":"0 5px"}}></AccountCircleIcon>   
+                          </Box>
+                          <Box flex >
+                               <Box>
+                                    <Typography variant="subtitle1">
+                                        Ziyaretçi  
+                                        
+                                        <Box component="span" color="textSecondary" display="inline"> {timeAgo(c.date.current,'G UA Y UG')} </Box>
+                                    </Typography>
+                               </Box>
+                               <Box>
+                                    <Typography variant="body1">
+                                    {c.comment}
+                                    </Typography>
+                               </Box>
+                          </Box>
+                      </Box>
+                      </Card>
+
                   </div>
             ))
             }
@@ -123,24 +100,7 @@ class BlogPost extends Component {
 
       );
   }
-  async postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return await response.json(); // parses JSON response into native JavaScript objects
-  }
-
+  
   static async getInitialProps({query}) {
     let p = query.postId;
     const data = await fetch(`${process.env.WEBPATH}/api/post/`+p).then(data => data.json());
@@ -149,40 +109,14 @@ class BlogPost extends Component {
    
 
     const visitor = ua(process.env.GOOGLE_UA);
-    visitor.pageview(`/${p}`, process.env.WEBPATH, "Welcome", function (err) {
-      // …
-      console.log(err);
-    });
+    visitor.pageview(`/${p}`, process.env.WEBPATH, "Welcome", function (err) {});
     if(post == null)
         return {post};
     return { post:post[0] };
   }
 
 
-  async sendComment(){
-    event.preventDefault();
-    
-    const result = await this.postData(`${process.env.WEBPATH}/api/actions`,{
-      postId:this.props.post._id,
-      comment:this.state.comment,
-      action:"comment"
-    });
-
-    if(result.error){
-      alert(result.error)
-    }else{
-      const a = this.state.comments;
-      a.unshift(result);
-      this.setState({
-          comment:'',
-          comments:a
-      });
-
-      
-    }
-
-
-  }
+  
 
   changeComment(e){
 
@@ -194,6 +128,8 @@ class BlogPost extends Component {
 
   render() {
 
+      
+    
     /**
      * if article not found 
      * such return p404 page
@@ -204,85 +140,56 @@ class BlogPost extends Component {
           <Pnotfound />
       )
     }
-      
-
     return (
-      
-      <div className="container">
-      <Head>
-          <title>{this.props.post.title}</title>
-      </Head>
-      <Header />
+        
+     
+       <Container maxWidth="md" style={{'font-family':'Arial'}}> 
+            <Head>
+                <title>{this.props.post.title}</title>
+            </Head>    
+            <Header2></Header2>
+           <CardMedia 
+           component="img"
+           height="400"
+           image="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+
+           </CardMedia>
+     
+
       <div className="blog">
-        <h2 className="blog-title">
-          <Link href="/test">
-            <a className="blog-title-link">{this.props.post.title}</a>
-          </Link>
-        </h2>
+      
+          <Typography variant="h4" style={ {'padding':'10px 0 '}}>
+                {this.props.post.title}
+          </Typography>
+         
+
+     
         <div className="blog-text">
           <ReactMarkdown source={this.props.post.details} />
         </div>
         <div className="blog-date">{dateFormat(this.props.post.date.current,'G UA Y')}</div>
         <hr/>
         <hr/>
-            Paylaş :   Facebook - Twitter
-            link:
+   
+        <FacebookIcon/>
+        <TwitterIcon />
+    
         <hr></hr>
-        <form onSubmit={this.sendComment.bind(this)}>
-            <label>
-               Yorumunuz
-              <textarea rows="5" style={
-                {
-                  width:"100%"
-                }
-              } value={this.state.comment} onChange={this.changeComment.bind(this)} />
-            </label>
 
-            <button type="submit" disabled={this.state.comment.length < 5}>Gönder</button>
-
-        </form>
-
+        <FormComment postId={this.props.post._id}></FormComment>
+      
+     
         
 
         <this.TempComments />
      
       </div>
-      <style jsx>{`
-        .container {
-          max-width: 650px;
-          width: 100%;
-          margin: 0 auto;
-        }
-
-        .hero {
-          text-align: center;
-          margin: 96px 0;
-        }
-
-        .social-link {
-          margin-right: 8px;
-        }
-
-        .hero-title {
-          font-size: 48px;
-        }
-
-        .blog-date {
-          text-align: right;
-          color: #cccccc;
-          margin: 12px 0 48px 0;
-        }
-
-        a {
-          color: #35459e;
-          text-decoration: none;
-        }
-      `}</style>
-    </div>
+      </Container>
     )
 
   }
 }
+
 
 export default BlogPost;
 
