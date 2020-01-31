@@ -64,34 +64,33 @@ class BlogPost extends Component {
          return (<div>Yorum yapılmadı ilk yorum yapan sen ol!</div>);
       return (
 
-
         <div>
             <Typography style={{'padding':'10px 0'}} variant="h5">
                 YORUMLAR ({this.state.comments.length})
             </Typography>
             {this.state.comments.map( c => (
                   <div key={c._id}>
-                      <Card style={{'margin':'6px 0'}}>
-                      <Box display="flex">
+                     
+                      <Box display="flex" style={{'margin':'6px 0'}}>
                           <Box>
                             <AccountCircleIcon fontSize="large" style={{"padding":"0 5px"}}></AccountCircleIcon>   
                           </Box>
-                          <Box flex >
+                          <Box>
                                <Box>
                                     <Typography variant="subtitle1">
                                         Ziyaretçi  
                                         
-                                        <Box component="span" color="textSecondary" display="inline"> {timeAgo(c.date.current,'G UA Y UG')} </Box>
+                                        <Typography style={{fontSize:"12px"}} variant="body1" color="textSecondary" display="inline"> {timeAgo(c.date.current,'G UA Y UG')} </Typography>
                                     </Typography>
                                </Box>
                                <Box>
                                     <Typography variant="body1">
-                                    {c.comment}
+                                        {c.comment}
                                     </Typography>
                                </Box>
                           </Box>
                       </Box>
-                      </Card>
+                
 
                   </div>
             ))
@@ -109,7 +108,7 @@ class BlogPost extends Component {
    
 
     const visitor = ua(process.env.GOOGLE_UA);
-    visitor.pageview(`/${p}`, process.env.WEBPATH, "Welcome", function (err) {});
+    visitor.pageview(`/${p}`, process.env.WEBPATH, "Anasayfa", function (err) {});
     if(post == null)
         return {post};
     return { post:post[0] };
@@ -148,19 +147,25 @@ class BlogPost extends Component {
                 <title>{this.props.post.title}</title>
             </Head>    
             <Header2></Header2>
-           <CardMedia 
-           component="img"
-           height="400"
-           image="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+            <Box position="relative">
+              <CardMedia 
+              component="img"
+              height="400"
+              image="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+              </CardMedia>
+              <Box position="absolute" style={{"right":"0","bottom":"0","background-color":"white"}}>
+                  <Typography variant="body2" style={ {'padding':'10px 0 '}}>
+                    fasfsafa
+                  </Typography>
+              </Box>
 
-           </CardMedia>
-     
+            </Box>
 
       <div className="blog">
       
-          <Typography variant="h4" style={ {'padding':'10px 0 '}}>
+        <Typography variant="h4" style={ {'padding':'10px 0 '}}>
                 {this.props.post.title}
-          </Typography>
+        </Typography>
          
 
      
@@ -168,13 +173,10 @@ class BlogPost extends Component {
           <ReactMarkdown source={this.props.post.details} />
         </div>
         <div className="blog-date">{dateFormat(this.props.post.date.current,'G UA Y')}</div>
-        <hr/>
-        <hr/>
-   
+  
         <FacebookIcon/>
         <TwitterIcon />
     
-        <hr></hr>
 
         <FormComment postId={this.props.post._id}></FormComment>
       

@@ -21,7 +21,7 @@ module.exports = withCSS(withSass({
   },
   env: {
     MLAB_CONNECTION_STRING: "mongodb://admin:admin123@ds111876.mlab.com:11876/specialproject",
-    WEBPATH:"https://gorkembayraktar.herokuapp.com",
+    WEBPATH:"http://gorkembayraktar.herokuapp.com",
     GOOGLE_UA:"UA-156499554-1"
   },
   api: {

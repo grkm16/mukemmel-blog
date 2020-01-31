@@ -36,7 +36,11 @@ export default async (req, res) => {
             }
             const ip = await publicIP.v4();
             const data = await Action(postId,comment,ip,userAgent);
-            res.json(data);
+            res.json({
+                ...data,
+                status:'OK',
+                message:'Yorumunuz gönderildi,yönetici tarafından onaylandıktan sonra görülebilir.'
+            });
            
         break;
 
