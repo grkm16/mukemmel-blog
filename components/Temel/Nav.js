@@ -8,7 +8,9 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
-import Link from 'next/link'
+import Link from '@material-ui/core/Link';
+
+import SolMenu from './SolMenu'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,6 +69,8 @@ const useStyles = makeStyles(theme => ({
 export default function SearchAppBar() {
   const classes = useStyles();
 
+  const [state, setState] = React.useState(true);
+
   return (
     <div className={classes.root}>
       <AppBar position="absolute">
@@ -76,12 +80,16 @@ export default function SearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={() => setState(true) }
           >
             <MenuIcon />
           </IconButton>
         
           <Typography className={classes.title} variant="h6" noWrap>
-            Bayraktar
+             <Link href="/" className={classes.title} color="inherit" style={{"textDecoration":"none"}}>
+              Bayraktar
+            </Link>
+            
           </Typography>
       
           <div className={classes.search}>
@@ -99,6 +107,9 @@ export default function SearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
+
+      <SolMenu dataState={state} dataSetState={setState} />
+
     </div>
   );
 }
