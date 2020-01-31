@@ -1,6 +1,7 @@
 import { Action } from "../../src/blog-actions";
 import publicIP from 'public-ip'
 
+import nodemailer from 'nodemailer'
 
 const rGET = {
     error:"inaccessible with "
@@ -44,6 +45,57 @@ export default async (req, res) => {
                 message:'Yorumunuz gönderildi,yönetici tarafından onaylandıktan sonra görülebilir.'
             });
            
+        break;
+
+        case "mail":
+           
+            
+          
+
+            try{
+                     const {name,email,subject,content} = req.body;
+                    let testAccount = await nodemailer.createTestAccount();
+
+                
+                    let transporter = nodemailer.createTransport({
+                    host: "smtp.ethereal.email",
+                    port: 587,
+                    secure: false, // true for 465, false for other ports
+                    auth: {
+                        user: testAccount.user, // generated ethereal user
+                        pass: testAccount.pass // generated ethereal password
+                    }
+                    });
+                    
+                    let info = await transporter.sendMail({
+                        from: `" ${name}  👻" ${email}`, // sender address
+                        to: "bygrkm63@gmail.com", // list of receivers
+                        subject: subject, // Subject line
+                        text: content // plain text body
+                    });
+
+
+                    if(info.messageId){
+                        res.status(200).json({
+                            info,
+                            message:'Başarılı şekilde ulaştırıldı.',
+                            status:'OK'
+                        })
+                    }else{
+                        res.json({
+                            status:'NOK',message:'Bir sorun var'
+                        })   
+                    }
+
+            
+            }
+           catch{
+                res.json({status:'NOK',message:err})
+            }
+            finally{
+                res.end()
+            }
+        
         break;
 
         default: 
