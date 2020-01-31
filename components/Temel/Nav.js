@@ -69,10 +69,10 @@ const useStyles = makeStyles(theme => ({
 export default function SearchAppBar() {
   const classes = useStyles();
 
-  const [state, setState] = React.useState(true);
+  const [state, setState] = React.useState(false);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{'marginBottom':'80px'}}>
       <AppBar position="absolute">
         <Toolbar>
           <IconButton
@@ -85,12 +85,16 @@ export default function SearchAppBar() {
             <MenuIcon />
           </IconButton>
         
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} style={{'flexDirection':'row'}} variant="h6" noWrap>
              <Link href="/" className={classes.title} color="inherit" style={{"textDecoration":"none"}}>
               Bayraktar
             </Link>
-            
+             <Link href="/contact" color="inherit" style={{"textDecoration":"none",'marginLeft':'10px'}}>
+              İletişim
+            </Link>
           </Typography>
+         
+             
       
           <div className={classes.search}>
             <div className={classes.searchIcon}>
