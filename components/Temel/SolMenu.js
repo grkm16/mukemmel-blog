@@ -52,7 +52,7 @@ export default function TemporaryDrawer(props) {
     <CardMedia
     component="img"
     src="https://avatars0.githubusercontent.com/u/30536751"
-    style={{"padding":"15px","box-sizing":"border-box"}}
+    style={{"padding":"15px","boxSizing":"border-box"}}
     >
         
     </CardMedia>
@@ -60,7 +60,7 @@ export default function TemporaryDrawer(props) {
         <Typography align="center" className={classes.title} variant="h6" noWrap>
                 Görkem Bayraktar
         </Typography>
-        <Typography style={{'color':'darkblue'}} align="center" className={classes.title} variant="h6" noWrap>
+        <Typography style={{'color':'black'}} align="center" className={classes.title} variant="h6" noWrap>
             <Link target="_blank" href="https://github.com/grkm16" color="inherit">
                 <GitHubIcon fontSize="large"></GitHubIcon>
             </Link>

@@ -167,7 +167,7 @@ class BlogPost extends Component {
         </Typography>
          
         <Box>
-          <AssignmentIndIcon /> Görkem Bayraktar 
+           Görkem Bayraktar 
           
           
           <Typography display="inline" color="textSecondary" style={{"fontSize":'13px',"padding":"0 10px"}}>
@@ -184,8 +184,7 @@ class BlogPost extends Component {
           <ReactMarkdown source={this.props.post.details} />
         </Box>
        
-        <FacebookIcon/>
-        <TwitterIcon />
+       
     
         <FormComment postId={this.props.post._id}></FormComment>
       

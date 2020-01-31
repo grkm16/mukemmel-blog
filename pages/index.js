@@ -4,12 +4,10 @@ import Head from "next/head";
 
 import ua from 'universal-analytics'
 
-
-import Header from './../components/Header1'
 import Header2 from './../components/Temel/Nav'
-import Post from './../components/Post'
 import Post2 from './../components/Temel/Post'
 import Box from '@material-ui/core/Box'
+
 import '../src/styles/_main.sass';
 
 const visitor = ua(process.env.GOOGLE_UA);
@@ -41,21 +39,31 @@ class Home extends Component{
           <Header2></Header2>
 
           <Head>
-            <title>Anasayfa</title>
+            <meta charSet="utf-8" />
+            <title>Görkem'in Blogu</title>
             <link rel="icon" href="/favicon.ico" />
             <meta name="google-site-verification" content="eDZ2F-rKi-4pw-juThz_p0Ffz1VIWKwA3TDY5mRfKo8" />
           </Head>
           <Box flexDirection="column" alignItems="center" display="flex">
-             
                 {
                   this.state.isLoading ? 
-                  <p>yükleniyor</p> : this.state.posts.map( post => <Post2 key={post._id} post={post} />)
+                  <LoadingPost /> :
+                  this.state.posts.map( post => <Post2 key={post._id} post={post} />)
                 } 
           </Box>
         </div>
 
       );
   }
+}
+
+
+const LoadingPost = () => {
+    return (
+        <div>
+          <img src="/fakedata.png" />
+        </div>
+    );
 }
 
 
