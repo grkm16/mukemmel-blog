@@ -10,9 +10,7 @@ import {
 import {
     Alert,AlertTitle
 } from '@material-ui/lab'
- import {
-        Face as FaceIcon
- } from '@material-ui/icons'
+
 import fetch from "isomorphic-unfetch";
 
 export default class CommentField extends React.Component {
@@ -106,13 +104,13 @@ export default class CommentField extends React.Component {
         return (
             <form noValidate autoComplete="off" onSubmit={this.sendComment.bind(this)}>
                 <Alert style={{"margin":"10px 0"}} severity="info">Aklınıza takılan konuları sorabilirsiniz.</Alert>
-                <Box style={{'margin':'12px 0'}}>
+                <Box style={{'margin':'12px 0',"padding":"10px 16px"}}>
   
                             <Box>
                                  <TextField disabled={this.state.loading} fullWidth={true} multiline id="standard-basic" label="Mesajınız" value={this.state.comment} onChange={this.changeComment.bind(this)} />
                             </Box>
                             <Box>
-                            <Box style={{'text-align':"right",'padding':'10px'}}>
+                            <Box style={{'textAlign':"right",'padding':'10px'}}>
                                 <Button type="submit" variant="contained" color="primary" disabled={this.state.comment.length < this.state.minCharacter || this.state.loading}>
                                    
                                     { this.state.loading ?  <CircularProgress disableShrink />  : ' Yorum Gönder'}
@@ -124,7 +122,7 @@ export default class CommentField extends React.Component {
                                     Ziyaretçi olarak yorum yapıyorsunuz.
                             </Typography>
                             <Typography variant="body2" style={{'color':(this.state.comment.length < this.state.minCharacter ? 'red' : 'green')}}>
-                                    En az 20 karakter girmelisiniz ({this.state.comment.length})
+                                    En az {this.state.minCharacter} karakter girmelisiniz ({this.state.comment.length})
                             </Typography>
                  
                 </Box>

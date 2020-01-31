@@ -28,11 +28,13 @@ export default async (req, res) => {
             if(!(comment || postId)){
                 rGET.error = "message or postId required";
                 res.json(rGET);
+                return;
             }
             
             if(comment.length > 1000){
                 rGET.error = " message length  < 1000 ";
                 res.json(rGET);
+                return;
             }
             const ip = await publicIP.v4();
             const data = await Action(postId,comment,ip,userAgent);

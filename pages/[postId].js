@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import Pnotfound from './p404';
 
 import dateFormat from '../helper/func.dateFormat';
+import HelperMinRead from '../helper/func.minRead'
 
 import timeAgo from '../helper/func.timeAgo';
 
@@ -23,8 +24,11 @@ import {
 import {
     Facebook as FacebookIcon,
     Twitter as TwitterIcon,
-    AccountCircle as AccountCircleIcon
+    AccountCircle as AccountCircleIcon,
+    Description as DescriptionIcon,
+    AssignmentInd as AssignmentIndIcon
 } from '@material-ui/icons'
+
 
 import FormComment from './../components/Temel/Form.comment'
 
@@ -142,7 +146,7 @@ class BlogPost extends Component {
     return (
         
      
-       <Container maxWidth="md" style={{'font-family':'Arial'}}> 
+       <Container maxWidth="md" style={{'fontFamily':'Arial'}}> 
             <Head>
                 <title>{this.props.post.title}</title>
             </Head>    
@@ -150,34 +154,39 @@ class BlogPost extends Component {
             <Box position="relative">
               <CardMedia 
               component="img"
-              height="400"
+              height="300"
               image="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
               </CardMedia>
-              <Box position="absolute" style={{"right":"0","bottom":"0","background-color":"white"}}>
-                  <Typography variant="body2" style={ {'padding':'10px 0 '}}>
-                    fasfsafa
-                  </Typography>
-              </Box>
 
             </Box>
 
-      <div className="blog">
+     
       
         <Typography variant="h4" style={ {'padding':'10px 0 '}}>
                 {this.props.post.title}
         </Typography>
          
+        <Box>
+          <AssignmentIndIcon /> Görkem Bayraktar 
+          
+          
+          <Typography display="inline" color="textSecondary" style={{"fontSize":'13px',"padding":"0 10px"}}>
+               {HelperMinRead(this.props.post.details)}
+          </Typography>
 
+          <Typography display="inline" color="textSecondary">
+              {dateFormat(this.props.post.date.current,'G UA Y')}
+          </Typography>
+           
+        </Box>
      
-        <div className="blog-text">
+        <Box>
           <ReactMarkdown source={this.props.post.details} />
-        </div>
-        <div className="blog-date">{dateFormat(this.props.post.date.current,'G UA Y')}</div>
-  
+        </Box>
+       
         <FacebookIcon/>
         <TwitterIcon />
     
-
         <FormComment postId={this.props.post._id}></FormComment>
       
      
@@ -185,7 +194,6 @@ class BlogPost extends Component {
 
         <this.TempComments />
      
-      </div>
       </Container>
     )
 
