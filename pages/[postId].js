@@ -18,7 +18,7 @@ import {
     Container,
     CardMedia,
     Typography,
-    Card
+    Divider
 } from '@material-ui/core'
 
 import {
@@ -67,11 +67,7 @@ class BlogPost extends Component {
       else if(this.state.comments.length == 0)
          return (<div>Yorum yapılmadı ilk yorum yapan sen ol!</div>);
       return (
-
         <div>
-            <Typography style={{'padding':'10px 0'}} variant="h5">
-                YORUMLAR ({this.state.comments.length})
-            </Typography>
             {this.state.comments.map( c => (
                   <div key={c._id}>
                      
@@ -159,17 +155,13 @@ class BlogPost extends Component {
               </CardMedia>
 
             </Box>
-
-     
-      
         <Typography variant="h4" style={ {'padding':'10px 0 '}}>
                 {this.props.post.title}
         </Typography>
          
         <Box>
-           Görkem Bayraktar 
-          
-          
+           @pfoduk
+
           <Typography display="inline" color="textSecondary" style={{"fontSize":'13px',"padding":"0 10px"}}>
                {HelperMinRead(this.props.post.details)}
           </Typography>
@@ -183,19 +175,19 @@ class BlogPost extends Component {
         <Box>
           <ReactMarkdown source={this.props.post.details} />
         </Box>
-       
-       
-    
-        <FormComment postId={this.props.post._id}></FormComment>
-      
-     
+        <Divider />
+       {
+            this.state.comments.length && 
+            <Typography style={{'padding':'10px 0','fontWeight':'bold'}} variant="body1">
+                    {this.state.comments.length} Yorum
+            </Typography>
+        }
         
-
+        <FormComment postId={this.props.post._id}></FormComment>
         <this.TempComments />
      
       </Container>
     )
-
   }
 }
 

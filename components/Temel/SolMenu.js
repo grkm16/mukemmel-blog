@@ -38,47 +38,46 @@ export default function TemporaryDrawer(props) {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
+    console.log(event.target)
     props.dataSetState(open);
   };
 
   const sideList = () => (
     <div
+      id="controller-left-bar"
       className={classes.list}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
+      style={{'backgroundColor':'#19204c','color':'#fde2b5','minHeight':'100vh'}}
     >
 
     <CardMedia
     component="img"
     src="https://avatars0.githubusercontent.com/u/30536751"
-    style={{"padding":"15px","boxSizing":"border-box"}}
+    
     >
         
     </CardMedia>
 
-        <Typography align="center" className={classes.title} variant="h6" noWrap>
+        <Typography align="center" style={{'padding':'10px'}} className={classes.title} variant="h6" noWrap>
                 Görkem Bayraktar
         </Typography>
-        <Typography style={{'color':'black'}} align="center" className={classes.title} variant="h6" noWrap>
+
+        <Divider />
+     
+        <Typography style={{'color':'#fde2b5'}} align="center" className={classes.title} variant="h6" noWrap>
             <Link target="_blank" href="https://github.com/grkm16" color="inherit">
                 <GitHubIcon fontSize="large"></GitHubIcon>
             </Link>
-            <Link href="#"  color="inherit">
+            <Link target="_blank" href="https://www.facebook.com/grkm16"  color="inherit">
                 <FacebookIcon fontSize="large"></FacebookIcon>
-            </Link>
-            <Link href="#"  color="inherit">
-                <LinkedInIcon fontSize="large"></LinkedInIcon>
-            </Link>
-            <Link href="#"  color="inherit">
-              <YoutubeIcon fontSize="large"></YoutubeIcon>
             </Link>
             <Link href="#"  color="inherit">
               <InstagramIcon fontSize="large"></InstagramIcon>
             </Link>
         </Typography>
 
-      <Divider />
      
     </div>
   );
